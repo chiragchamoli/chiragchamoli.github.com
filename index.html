@@ -27,6 +27,25 @@
         code {
             font-size: 80%;
         }
+        body, html {
+            height: 100%; /* Make sure body and html take full viewport height */
+            margin: 0; /* Remove default margins */
+        }
+
+       #notes-container {
+    height: 70vh; /* Full viewport height */
+    background-color: #fff9c4; /* Soft yellow for a warm paper feel */
+    overflow-y: auto; /* Scroll when needed */
+    padding: 2rem; /* More breathing room */
+    font-family: 'Arial', sans-serif; /* Clean font */
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+
+
+    
     </style>
 
 </head>
@@ -75,6 +94,14 @@
 
 
             </div>
+            <div class="col-12 col-md-9">
+                <div class="container-fluid" id="notes-container" contenteditable="true">
+    <p>Take notes!</p> 
+</div>
+
+            
+            </div> 
+                            <!-- 
             <div class="col-12 col-md-3">
                 <!-- Work Exp
 
@@ -204,9 +231,9 @@
 
                     </li>
                 </ul>
- -->
 
-                <!-- 
+
+
 
                 <hr>
 
@@ -238,7 +265,6 @@
 
 
 
- -->
 
 
 
@@ -247,11 +273,12 @@
 
 
 
-            </div>
-            <div class="col-12 col-md-6">
+
+            </div> -->
+          <!--   <div class="col-12 col-md-6">
 
             
-            </div>
+            </div> -->
         </div>
 
 
@@ -265,6 +292,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+        <script>
+    const notesContainer = document.getElementById('notes-container');
+    const savedNotesKey = 'savedNotes'; // Key for local storage
+
+    // Load saved notes on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedNotes = localStorage.getItem(savedNotesKey);
+        if (savedNotes) {
+            notesContainer.innerHTML = savedNotes;
+        }
+    });
+
+    // Save notes on every change (typing, pasting, etc.)
+    notesContainer.addEventListener('input', () => {
+        localStorage.setItem(savedNotesKey, notesContainer.innerHTML);
+    });
+
+
+    // Later: Add a clear button (if needed)
+    /*
+    const clearButton = document.createElement('button');
+    clearButton.textContent = 'Clear Notes';
+    clearButton.classList.add('btn', 'btn-danger', 'mt-2');
+    clearButton.addEventListener('click', () => {
+        notesContainer.innerHTML = '';
+        localStorage.removeItem(savedNotesKey);
+    });
+    document.body.appendChild(clearButton); // Or place it where you want
+    */
+
+</script>
 </body>
 
 </html>
