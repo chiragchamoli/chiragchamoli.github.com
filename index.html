@@ -1,329 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta name="theme-color" content="#7952b3">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chirag Chamoli - Engineering | MVP, Product Development, AI</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Custom styles */
         body {
-            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #f9f9f9;
+            font-family: "Silkscreen", sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+            /* important change */
+            align-items: stretch;
+            /* important change */
+        }
+        
+        .dos-container {
+            /*  background-color: #111;  Slightly darker container background */
+            padding: 30px;
+        }
+        
+        .title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1em;
+            color: #ddd;
+            /* Lighter text for subtitle */
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        /* Styles for the links container (now a ul) */
+        
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allow links to wrap on smaller screens */
+            gap: 20px;
+            /* Adjust the spacing between links */
+            align-items: center;
+            /* Vertically align items */
+            padding: 0;
+            /* Remove default padding from ul */
+            list-style: none;
+            /* Remove default bullet points from ul */
+            margin-top: 10px;
+            /* Add some top margin below the prompt */
+        }
+        /* Styles for each list item containing a link and icon */
+        
+        .links li {
+            display: flex;
+            /* Use flexbox for icon and text alignment within li */
+            align-items: center;
+            /* Vertically align icon and text */
+            white-space: nowrap;
+            /* Prevent individual link items from breaking mid-text */
+        }
+        /* Styles for the favicon images */
+        
+        .links li img {
+            width: 16px;
+            /* Standard favicon size */
+            height: 16px;
+            margin-right: 8px;
+            /* Space between icon and text */
+            vertical-align: middle;
+            /* Align image with text baseline */
+            border-radius: 2px;
+            /* Slightly rounded corners for favicons */
+        }
+        /* Styles for the actual link text */
+        
+        .links li a {
+            color: #00ff00;
+            /* Green for links */
+            text-decoration: none;
+            transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+            /* Subtle transition */
+        }
+        
+        .links li a:hover {
+            color: #00bfff;
+            /* Secondary color (blue) on hover */
+            text-shadow: 0 0 5px #00bfff;
+            /* Optional glow on hover */
+            text-decoration: none;
+            /* Remove default underline */
+        }
+        
+        .title::after {
+            content: '_';
+            animation: blink-cursor 0.8s step-end infinite;
+        }
+        
+        @keyframes blink-cursor {
+            from,
+            to {
+                color: transparent
+            }
+            50% {
+                color: #00ff00;
+            }
+        }
+        
+        .links {
+            display: flex;
+            gap: 20px;
+            /* Adjust the spacing between links */
+            align-items: center;
+            /* Vertically align items (helpful if emojis have different baseline) */
+        }
+        
+        .links a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        .links a:hover {
+            text-decoration: none;
+            /* Remove default underline */
+            color: #00bfff;
+            /* Example secondary color */
+            text-shadow: 0 0 5px #00bfff;
+            /* Optional glow effect */
+        }
+        
+        .snake-background {
+            position: fixed;
+            /* Stay in the background */
+            top: 50%;
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            background-color: #00ff00;
+            /* Snake color */
+            border-radius: 50%;
+            /* Make it circular */
+            opacity: 0.3;
+            /* Make it subtle */
+            z-index: -1;
+            /* Behind other content */
+            animation: subtle-snake-move 10s linear infinite;
+        }
+        
+        @keyframes subtle-snake-move {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(50px) translateY(20px);
+            }
+            50% {
+                transform: translateX(30px) translateY(70px);
+            }
+            75% {
+                transform: translateX(-20px) translateY(50px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+        
+        #snakeCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            /* Behind everything */
+            opacity: 0.2;
+            /* Subtle */
+        }
+        
+        .left-section {
+            width: 40%;
+            padding: 40px;
+            box-sizing: border-box;
+            border-right: 2px solid #333;
+        }
+        
+        .title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            font-size: 0.9em;
+            line-height: 1.4em;
+            margin-bottom: 20px;
+        }
+        
+        .links li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+        
+        .links img {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        
+        .links a {
+            color: #00FF00;
+            text-decoration: none;
+        }
+        /* .right-section {
+            width: 60%;
+            position: relative;
+            overflow: hidden;
+            background-color: black;
+        } */
+        /* Right section styling from your input */
+        /* Right section styling */
+        
+        .right-section {
+            width: 60%;
+            /* Occupy 60% of the screen width */
+            position: relative;
+            /* Crucial for absolute positioning of its children */
+            overflow: hidden;
+            /* Hide content that goes outside this div */
+            background-color: black;
+            /* Black background for the credits area */
+            color: #00ff00;
+            /* Bright green text, typical retro color */
             padding: 20px;
-            background-color: #fff;
+            /* Padding inside the section */
+            height: 100vh;
+            /* Ensure right-section has a defined height to properly contain its children */
+            display: flex;
+            /* Use flexbox for centering the thanks message */
+            flex-direction: column;
+            justify-content: center;
+            /* Vertically center content if it's not scrolling */
+            align-items: center;
+            /* Horizontally center content */
         }
-
-        html {
-            font-size: 14px;
+        /* Container for the scrolling content (now a single set) */
+        
+        .crawl-wrapper {
+            position: absolute;
+            /* Position absolutely within .right-section */
+            top: 100%;
+            /* Start completely off-screen at the bottom */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            /* Center the text lines */
+            white-space: nowrap;
+            /* Prevent text from wrapping */
+            /* Animation for the single scroll effect */
+            /* Duration (e.g., 60s), linear speed, stops at end state */
+            animation: credits-single-scroll 60s linear forwards;
+            /* Add padding to ensure content starts off-screen at the bottom and scrolls fully off-screen at the top */
+            padding-top: 50vh;
+            /* Pushes the first content block down to start off-screen */
+            padding-bottom: 50vh;
+            /* Ensures the content scrolls fully out of view at the top */
         }
-
-        code {
-            font-size: 80%;
+        /* Keyframe animation for the single credits scroll */
+        
+        @keyframes credits-single-scroll {
+            0% {
+                /* Starts at top: 100%, so translateY(0) keeps it there initially */
+                transform: translateY(0);
+            }
+            100% {
+                /* Moves the wrapper up by its full height plus the viewport height,
+                   ensuring it goes completely off the top of the screen. */
+                transform: translateY(calc(-100% - 100vh));
+            }
         }
-        body, html {
-            height: 100%; /* Make sure body and html take full viewport height */
-            margin: 0; /* Remove default margins */
+        /* Styling for each individual line in the credits */
+        
+        .crawl-line {
+            margin-bottom: 20px;
+            /* Space between credit lines */
+            line-height: 1.5;
+            /* Adjust line height for readability */
+            font-size: 1.1em;
+            /* Slightly larger font size */
         }
-
-       #notes-container {
-    height: 70vh; /* Full viewport height */
-    background-color: #f6f6f6; /* Soft yellow for a warm paper feel */
-    overflow-y: auto; /* Scroll when needed */
-    padding: 2rem; /* More breathing room */
-    font-family: 'Arial', sans-serif; /* Clean font */
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-}
-
-
-
-    
+        /* Styling for the bold text (e.g., job titles) */
+        
+        .crawl-line b {
+            color: yellow;
+            /* Main green color */
+            /* Retro glitchy text shadow effect */
+            text-shadow: 2px 2px #ff00ff, -2px -2px #00ffff;
+            /* Magenta and Cyan shadows */
+            display: block;
+            /* Make bold text take its own line for better spacing */
+            margin-bottom: 5px;
+            /* Space between title and description */
+        }
+        /* Styling for the "Thanks for playing" message */
+        
+        .thanks-message {
+            position: absolute;
+            /* Position absolutely within .right-section */
+            top: 50%;
+            /* Center vertically */
+            left: 50%;
+            /* Center horizontally */
+            transform: translate(-50%, -50%);
+            /* Adjust for its own size */
+            opacity: 0;
+            /* Initially hidden */
+            visibility: hidden;
+            /* Also hidden from screen readers */
+            font-size: 2.5em;
+            /* Large font size for impact */
+            color: #ffffff;
+            /* White text */
+            text-shadow: 3px 3px #ff00ff, -3px -3px #00ffff;
+            /* Matching retro shadow */
+            /* Animation to fade in after the credits finish */
+            animation: fade-in 2s ease-out forwards;
+            /* Fade in over 2 seconds */
+            animation-delay: 60s;
+            /* Start after 60 seconds (matching credit scroll duration) */
+            z-index: 10;
+            /* Ensure it appears above the credits if they overlap briefly */
+        }
+        /* Keyframe animation for fading in the thanks message */
+        
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                visibility: hidden;
+            }
+            1% {
+                /* Make it visible just before opacity starts increasing */
+                visibility: visible;
+            }
+            100% {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        /* Responsive adjustments */
+        
+        @media (max-width: 768px) {
+            .right-section {
+                width: 100%;
+                /* On smaller screens, take full width */
+                padding: 10px;
+            }
+            .crawl-line {
+                font-size: 0.9em;
+                /* Smaller font on mobile */
+            }
+            .thanks-message {
+                font-size: 1.8em;
+                /* Smaller font on mobile */
+            }
+        }
     </style>
 
 </head>
 
-
-
-
-
 <body>
 
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-12 col-md-3">
-                <p>
-                    Hi, I’m Chirag Chamoli—though you probably already knew that. I’m a four-time founder with extensive
-                    experience in technology leadership roles, including CTO, VP of Engineering, and Technical
-                    Architect. My core expertise lies in Python, Golang, and JavaScript/Node.js. I specialize in
-                    developing enterprise software and SaaS solutions, focusing on scalable, high-performance APIs,
-                    robust architectures, and building highly effective teams.
-
-
-
-
-
-
-
-                </p>
-                <a href="https://github.com/chiragchamoli" class="card-link">Github</a>
-                <a href="https://www.linkedin.com/in/chiragchamoli/" class="card-link">Linkedin</a>
-                <a href="mailto:chirax@gmail.com" class="card-link">Get in touch</a>
-                <hr> Notable:
-
-                <ul class="list-unstyled">
-                    <li><img src="http://www.google.com/s2/favicons?domain=500.co"> <a
-                            href="https://500.co/content/sourceeasy-acquires-us-based-online-custom-apparel-design-firm-abbey-post">500
-                            startup</a></li>
-                    <li><img src="http://www.google.com/s2/favicons?domain=ycombinator.com"> <a
-                            href="https://www.ycombinator.com/companies/edyst">ycombinator</a></li>
-                    <li><img src="http://www.google.com/s2/favicons?domain=producthunt.com"> <a
-                            href="https://www.producthunt.com/posts/ansy-ai">#2 product of the day (producthunt)</a>
-                    </li>
-                </ul>
-
-
-
-
-            </div>
-            <div class="col-12 col-md-9">
-                <div class="container-fluid" id="notes-container" contenteditable="true">
-    <p></p> 
-</div>
-
-            
-            </div> 
-                            <!-- 
-            <div class="col-12 col-md-3">
-                <!-- Work Exp
-
-                <br><br>
-
-
-                <ul class="list-unstyled gap-2">
-                    <li class="mb-3">
-                        <small class="text-muted">April 2024 - Present</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Marvin</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                Director of Engineering.
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-
-                        <small class="text-muted">July 2023 - March 2024</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Polymerize</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                Director of Engineering.
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-                        <small class="text-muted">March 2022 - July 2023</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Build in public (bip.so)</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                CTO
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-                        <small class="text-muted">July 2019 - March 2022</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">SupplyCompass</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                CTO
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-
-                        <small class="text-muted">July 2018 - July 2019</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">ChatBook (Crew)</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                CTO.
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-
-                        <small class="text-muted">Feb 2018 - July 2018</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Edyst</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                Advisor/Backend Architect
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-
-                        <small class="text-muted">March 2014 - January 2018</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Sourceeasy</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                CTO/Co-Founder
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-
-                        <small class="text-muted">May 2008 - Nov 2013</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">NetApp</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                Technical Manager
-                            </figcaption>
-                        </figure>
-
-                    </li>
-
-                    <li class="mb-3">
-                        <small class="text-muted">May 2008 - Nov 2013</small>
-                        <figure class="mb-0">
-                            <blockquote class="blockquote ">
-                                <p class="fs-5">Tata Elxsi</p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer mb-0">
-                                Software Engineer
-                            </figcaption>
-                        </figure>
-
-                    </li>
-                </ul>
-
-
-
-
-                <hr>
-
-                Intresting
-                <ul>
-                    <li></li>
-                </ul>
-                <a class="cc" href="https://www.ansy.ai/">ansy.ai - automate faq in 5 mins</a> -
-                <code> Discord / Slack and Document FAQ software.</code><br>
-                <a class="cc" href="https://bip.so/">bip.so - git based wiki for your community</a> -
-                <code>Text editor with realtime git capabilities</code> <br>
-                <a class="cc" href="https://www.crunchbase.com/organization/supply-compass">supplycompass - plm +
-                    supply chain management</a> - <code>PLM + Supplychain Management Software </code> <br>
-                <a class="cc" href="https://qthority.com/">qthority - legal qa</a> - <code>Web Bot</code> <br>
-                <a class="cc" href="http://everyulb.com/">csr - enterprise resources management</a> -
-                <code>Corporate Social Responsibility SAAS</code> <br>
-                <a class="cc" href="https://demo.bookadabra.com/">bookadabra - booking service</a> -
-                <code>Booking Service</code> <br>
-                <a class="cc"
-                    href="https://angel.co/projects/199307-the-sourceeasy-platform?src=user_profile">sourceeasy -
-                    product lifecycle management + erp (apparel) </a> -
-                <code>PLM + Supplychain Management Software + Communication stack with Whatsapp</code><br>
-                <a class="cc" href="https://angel.co/projects/123599-techpack-io?src=user_profile">techpack.io -
-                    first online editor</a> <br>
-                <a class="cc" href="https://angel.co/projects/689525-inquy-sneekpeek?src=user_profile">inquy - note
-                    taking /storage app</a> - <code>Digital Note Taking App</code> <br>
-                <a class="cc" href="https://www.samsung.com/semiconductor/minisite/ssd/support/faqs-04/">usb secure
-                    delete</a> <br>
-
-
-
-
-
-
-
-
-
-
-
-
-            </div> -->
-          <!--   <div class="col-12 col-md-6">
-
-            
-            </div> -->
+    <div class="left-section">
+        <div class="title">Hi, I’m Chirag Chamoli</div>
+        <div class="subtitle">though you probably already knew that.</div>
+        <div class="description">
+            I’m a four-time founder with extensive experience in technology leadership roles, including CTO, VP of Engineering, and Technical Architect. My core expertise lies in Python, Golang, and JavaScript/Node.js. I specialize in developing enterprise software
+            and SaaS solutions, focusing on scalable, high-performance APIs, robust architectures, and building highly effective teams.
         </div>
-
-
+        <ul class="links">
+            <li><img src="http://www.google.com/s2/favicons?domain=500.co"> <a href="https://500.co/content/sourceeasy-acquires-us-based-online-custom-apparel-design-firm-abbey-post">500
+          startups</a></li>
+            <li><img src="http://www.google.com/s2/favicons?domain=ycombinator.com"> <a href="https://www.ycombinator.com/companies/edyst">ycombinator</a></li>
+            <li><img src="http://www.google.com/s2/favicons?domain=producthunt.com"> <a href="https://www.producthunt.com/posts/ansy-ai">producthunt</a></li>
+        </ul>
     </div>
+    <div class="right-section">
+        <div class="crawl-wrapper">
+            <div class="crawl-content">
+
+                <div class="crawl">
+                    <div class="crawl-line">
+                        <b>Director of Engineering @ Polymerize</b> (Singapore) Jul '23 – Present<br> Scalable AI/ML pipelines, realtime infrastructure.
+                    </div>
+                    <div class="crawl-line">
+                        <b>CTO @ BIP</b> (India) Mar '22 – Jul '23<br> Wiki platform, Ansy.ai (100k users), Ketchup.live.
+                    </div>
+                    <div class="crawl-line">
+                        <b>CTO @ BIP</b> (India) Mar '22 – Jul '23<br> Wiki platform, Ansy.ai (100k users), Ketchup.live.
+                    </div>
+                    <div class="crawl-line">
+                        <b>CTO @ SupplyCompass</b> (UK) Jul '19 – Mar '22<br> SaaS for fashion collaboration, microservices.<br>
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>CTO @ ChatBook</b> (Japan) Jul '18 – Jul '19<br> Chatbot marketing & automation integrations.<br>
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>Advisor @ Edyst</b> (Hyderabad) Feb '18 – Jul '18<br> Programming bootcamp & online testing.<br>
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>CTO & Co-Founder @ Sourceeasy</b> (Hyderabad) Mar '14 – Jan '18<br> Apparel manufacturing ERP & CRM, scaled 0-40 engineers.<br>
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>Technical Manager @ NetApp</b> (Bangalore) May '08 – Nov '13<br> Cloud tools, data management.<br>
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>Software Engineer @ Tata Elxsi</b> (Bangalore) May '08 – Nov '13<br> Embedded systems & storage interfaces.
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="thanks-message">
+            THANKS FOR PLAYING! chirax@gmail.com
+        </div>
     </div>
+    <!-- <div class="right-section">
+        <div class="crawl">
+            <b>Director of Engineering @ Polymerize</b> (Singapore) Jul '23 – Present<br> Scalable AI/ML pipelines, realtime infrastructure.
+            <br>
+            <b>CTO @ BIP</b> (India) Mar '22 – Jul '23<br> Wiki platform, Ansy.ai (100k users), Ketchup.live.<br>
+            
+        </div>
+    </div> -->
 
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-        <script>
-    const notesContainer = document.getElementById('notes-container');
-    const savedNotesKey = 'savedNotes'; // Key for local storage
-
-    // Load saved notes on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedNotes = localStorage.getItem(savedNotesKey);
-        if (savedNotes) {
-            notesContainer.innerHTML = savedNotes;
-        }
-    });
-
-    // Save notes on every change (typing, pasting, etc.)
-    notesContainer.addEventListener('input', () => {
-        localStorage.setItem(savedNotesKey, notesContainer.innerHTML);
-    });
-
-
-    // Later: Add a clear button (if needed)
-    /*
-    const clearButton = document.createElement('button');
-    clearButton.textContent = 'Clear Notes';
-    clearButton.classList.add('btn', 'btn-danger', 'mt-2');
-    clearButton.addEventListener('click', () => {
-        notesContainer.innerHTML = '';
-        localStorage.removeItem(savedNotesKey);
-    });
-    document.body.appendChild(clearButton); // Or place it where you want
-    */
-
-</script>
 </body>
 
 </html>
