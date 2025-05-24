@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chirag Chamoli - Engineering | MVP, Product Development, AI</title>
+    <title>Chirag Chamoli</title>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -377,6 +378,56 @@
                 /* Smaller font on mobile */
             }
         }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow: auto;
+            }
+            .left-section,
+            .right-section {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+                border-right: none;
+            }
+            .right-section {
+                align-items: flex-start;
+            }
+            .title {
+                font-size: 1.5em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            .description {
+                font-size: 0.9em;
+            }
+            .crawl-line {
+                font-size: 0.9em;
+            }
+            .thanks-message {
+                font-size: 1.5em;
+            }
+            .crawl-wrapper {
+                animation: none;
+                position: relative;
+                top: auto;
+                padding: 0;
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .crawl-wrapper {
+                animation: none;
+                overflow-y: auto;
+            }
+            .crawl-line {
+                margin-bottom: 10px;
+            }
+        }
     </style>
 
 </head>
@@ -403,7 +454,11 @@
 
                 <div class="crawl">
                     <div class="crawl-line">
-                        <b>Director of Engineering @ Polymerize</b> (Singapore) Jul '23 – Present<br> Scalable AI/ML pipelines, realtime infrastructure.
+                        <b>Director of Engineering @ HeyMarvin</b> (India) Present<br> Scalable AI/ML pipelines, realtime infrastructure.
+                    </div>
+
+                    <div class="crawl-line">
+                        <b>Director of Engineering @ Polymerize</b> (Singapore) Jul '23 – Apr '24 <br> AI powered research platform.
                     </div>
                     <div class="crawl-line">
                         <b>CTO @ BIP</b> (India) Mar '22 – Jul '23<br> Wiki platform, Ansy.ai (100k users), Ketchup.live.
